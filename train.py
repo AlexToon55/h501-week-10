@@ -54,6 +54,6 @@ y2 = df2['rating']
 
 print(X2.shape, y2.shape)
 
-model2 = 
+
 print(df[['roast', 'roast_num']].head())
 print("n_missing:", df['roast_num'].isna().sum())
