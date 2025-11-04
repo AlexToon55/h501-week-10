@@ -5,7 +5,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 
 
-# Exercise 1 
+''' Exercise 1 - train and save model '''
 
 # save model as 'model_1.pickle'
 def save_model(model, path):
@@ -20,24 +20,28 @@ def load_data():
     return df
 
 
-# train and save model
+# Exercise 1 - train and save model
 df = load_data()
 df = df.dropna(subset=['100g_USD', 'rating'])
+
+# prepare features and target variable
 x = df[['100g_USD']]
 y = df['rating']
-print(x.shape, y.shape)
 
+# train linear regression model
 model1 = LinearRegression()
 model1.fit(x, y)
+
+# save the trained model
 save_model(model1, 'model_1.pickle')
 
-print(sorted(df['roast'].dropna().unique().tolist()))
 
 
 
 
-# Exercise 2
+''' Exercise 2 - train and save model '''
 
+# map roast levels to integers
 roast_map = {
     'Light': 0,
     'Medium-Light': 1,
@@ -47,13 +51,16 @@ roast_map = {
 }
 df['roast'] = df['roast'].map(roast_map)
 
+# drop rows with missing values in relevant columns
 df2 = df.dropna(subset=['100g_USD', 'rating', 'roast'])
 
+# prepare features and target variable
 X2 = df2[['100g_USD', 'roast']]
 y2 = df2['rating']
 
-print(X2.shape, y2.shape)
-
+# train decision tree regressor
 model2 = DecisionTreeRegressor()
 model2.fit(X2, y2)
+
+# save the trained model
 save_model(model2, 'model_2.pickle')
