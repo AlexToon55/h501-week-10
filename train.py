@@ -45,15 +45,15 @@ roast_map = {
     'Medium-Dark': 3,
     'Dark': 4
 }
-df['roast_num'] = df['roast'].map(roast_map)
+df['roast'] = df['roast'].map(roast_map)
 
-df2 = df.dropna(subset=['100g_USD', 'rating', 'roast_num'])
+df2 = df.dropna(subset=['100g_USD', 'rating', 'roast'])
 
-X2 = df2[['100g_USD', 'roast_num']]
+X2 = df2[['100g_USD', 'roast']]
 y2 = df2['rating']
 
 print(X2.shape, y2.shape)
 
-
-print(df[['roast', 'roast_num']].head())
-print("n_missing:", df['roast_num'].isna().sum())
+model2 = DecisionTreeRegressor()
+model2.fit(X2, y2)
+save_model(model2, 'model_2.pickle')
